@@ -1,0 +1,3 @@
+Title: Name Said Sound
+Author: Munk
+Plays a sound when your name is said in chat.
