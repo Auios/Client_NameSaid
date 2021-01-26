@@ -5,6 +5,37 @@ new AudioProfile(nameChatSound)
     preload = true;
 };
 
+/// Returns whether or not a tab-delimited %list contains a given %item.
+/// %list: The list of items to check against.
+/// %item: The item to check for.
+function hasItemOnList(%list, %item)
+{
+    return striPos("\t"@%list@"\t", "\t"@%item@"\t") != -1;
+}
+
+/// Returns a tab-delimited string with %item added to %list, if it isn't already.
+/// %list: The list of items to add to.
+/// %item: The item to add to the list.
+function addItemToList(%list, %item)
+{
+    if(hasItemOnList(%list, %item))
+        return %list;
+    if(%list $= "") return %item;
+    return %list TAB %item;
+}
+
+/// Returns a tab-delimited string with all instances of %item removed from %list.
+/// %list: The list of items to remove from.
+/// %item: The item to remove from the list.
+function removeItemFromList(%list, %item)
+{
+    %fields = getFieldCount(%list);
+    for(%i=%fields-1;%i>=0;%i--)
+        if(getField(%list, %i) $= %item)
+            %list = removeField(%list, %i);
+    return %list;
+}
+
 package nameSaid
 {
     function clientCmdChatMessage(%wat,%lol,%m,%msg,%a0,%a1,%a2,%a3,%a4,%a5,%a6,%a7,%a8,%a9)
@@ -12,13 +43,14 @@ package nameSaid
 
         %name = $pref::Player::NetName;
         %lanName = $pref::player::LanName;
+        %hasNick = hasNickName(%a3);
 
-        if($Pref::Client::nameSaidSound && (striPos(%a3,%name) >= 0 || striPos(%a3, %lanName) >= 0) || hasNickName(%a3))
+        if($Pref::Client::nameSaidSound && (striPos(%a3,%name) >= 0 || striPos(%a3, %lanName) >= 0) || %hasNick)
         {
             alxPlay(nameChatSound);
             %len1 = strLen(%a3);
 
-            if(hasNickName(%a3))
+            if(%hasNick)
             {
                 %nickpos = getWord(findNickNamePos(%a3),0);
                 %nick = getWord(findNickNamePos(%a3,1));
@@ -49,7 +81,7 @@ package nameSaid
 };
 activatePackage(nameSaid);
 
-//Some of this tooken from Client_Chatsound by Chrono
+//Some of this is taken from Client_Chatsound by Chrono
 
 if($Pref::Client::nameSaidSound $= "")
 {
