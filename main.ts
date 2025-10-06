@@ -1,6 +1,12 @@
 import bl from "@lib/Blockland";
 import { clientCmdChatMessageArgs } from "@lib/CommonArgs";
 
+bl.new("AudioProfile nameChatSound", {
+  fileName: "Add-Ons/Client_NameSaid/nameSound.wav",
+  description: "AudioGui",
+  preload: true,
+});
+
 // Only keep alphanumeric characters for name check, but also check original
 const alnum = (str: string) =>
   str

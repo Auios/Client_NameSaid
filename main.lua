@@ -10,6 +10,7 @@ local __TS__StringReplace = ____lualib.__TS__StringReplace
 local ____exports = {}
 local ____Blockland = require("tslib.Blockland")
 local bl = ____Blockland.default
+bl.new("AudioProfile nameChatSound", {fileName = "Add-Ons/Client_NameSaid/nameSound.wav", description = "AudioGui", preload = true})
 local function alnum(str)
     return table.concat(
         __TS__ArrayFilter(
