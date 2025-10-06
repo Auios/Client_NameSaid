@@ -1,10 +1,10 @@
 {
-  "private": true,
   "scripts": {
     "build": "tstl",
     "dev": "tstl --watch"
   },
   "devDependencies": {
+    "@typescript-to-lua/language-extensions": "^1.19.0",
     "typescript": "^5.8.2",
     "typescript-to-lua": "^1.32.0"
   }

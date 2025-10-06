@@ -4,7 +4,7 @@
     "target": "ESNext",
     "lib": ["ESNext", "dom"],
     "moduleResolution": "Node",
-    "types": [],
+    "types": ["@typescript-to-lua/language-extensions"],
     "strict": true,
     "baseUrl": ".",
     "paths": {
